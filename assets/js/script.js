@@ -11,6 +11,9 @@ const elementToggleFunc = function (elem) {
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
+// make sidebar expanded by default
+sidebar.classList.add("active");
+
 // sidebar toggle functionality for mobile
 sidebarBtn.addEventListener("click", function () {
     elementToggleFunc(sidebar);
