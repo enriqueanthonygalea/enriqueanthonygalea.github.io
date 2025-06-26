@@ -154,7 +154,11 @@ for (let i = 0; i < navigationLinks.length; i++) {
     navigationLinks[i].addEventListener("click", function () {
 
         for (let j = 0; j < pages.length; j++) {
-            if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
+            // Normalize both strings to handle accents properly
+            const navText = this.innerHTML.toLowerCase().normalize('NFD');
+            const pageData = pages[j].dataset.page.toLowerCase().normalize('NFD');
+
+            if (navText === pageData) {
                 pages[j].classList.add("active");
                 navigationLinks[j].classList.add("active");
                 window.scrollTo(0, 0);
