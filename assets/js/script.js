@@ -170,3 +170,56 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
     });
 }
+
+// Check for resume=true query parameter on page load
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const resumeParam = urlParams.get('resume');
+
+    if (resumeParam === 'true') {
+        // Hide the sidebar
+        const sidebar = document.querySelector("[data-sidebar]");
+        if (sidebar) {
+            sidebar.style.display = 'none';
+        }
+
+        // Switch to resume section
+        const resumePage = document.querySelector("[data-page='résumé']");
+
+        // Find the resume navigation link
+        let resumeNavButton = null;
+        for (let i = 0; i < navigationLinks.length; i++) {
+            const navText = navigationLinks[i].innerHTML.toLowerCase().normalize('NFD');
+            if (navText === 'résumé') {
+                resumeNavButton = navigationLinks[i];
+                break;
+            }
+        }
+
+        // Deactivate all pages and nav links
+        for (let i = 0; i < pages.length; i++) {
+            pages[i].classList.remove("active");
+            navigationLinks[i].classList.remove("active");
+        }
+
+        // Activate resume page and nav link
+        if (resumePage) {
+            resumePage.classList.add("active");
+        }
+        if (resumeNavButton) {
+            resumeNavButton.classList.add("active");
+        }
+
+        // Hide the navigation bar for cleaner PDF export
+        const navbar = document.querySelector(".navbar");
+        if (navbar) {
+            navbar.style.display = 'none';
+        }
+
+        // Replace the resume title with name
+        const resumeTitle = resumePage.querySelector('.article-title');
+        if (resumeTitle) {
+            resumeTitle.textContent = 'Enrique Anthony Galea';
+        }
+    }
+});
