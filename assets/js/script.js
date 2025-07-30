@@ -220,6 +220,47 @@ document.addEventListener('DOMContentLoaded', function () {
         const resumeTitle = resumePage.querySelector('.article-title');
         if (resumeTitle) {
             resumeTitle.textContent = 'Enrique Anthony Galea';
+
+            // Create a container div for title and LinkedIn, using flex for alignment
+            const titleLinkedinContainer = document.createElement('div');
+            titleLinkedinContainer.style.display = 'flex';
+            titleLinkedinContainer.style.alignItems = 'center';
+            titleLinkedinContainer.style.justifyContent = 'space-between';
+
+            // Move the title into the container
+            resumeTitle.parentNode.insertBefore(titleLinkedinContainer, resumeTitle);
+            titleLinkedinContainer.appendChild(resumeTitle);
+
+            // Create the LinkedIn button
+            const ul = document.createElement('ul');
+            ul.className = 'social-list';
+            ul.style.margin = '0 0 0 20px'; // some space to the left
+
+            const li = document.createElement('li');
+            li.className = 'social-item';
+
+            const a = document.createElement('a');
+            a.href = 'https://www.linkedin.com/in/enriquegalea';
+            a.className = 'social-link';
+            a.target = '_blank';
+            a.style.display = 'inline-block';
+            a.style.padding = '4px 8px';
+            a.style.background = '#1e1e1f';
+            a.style.borderRadius = '4px';
+            a.style.transform = 'translateY(-20px)';
+
+            // Use ion-icon for LinkedIn logo
+            const icon = document.createElement('ion-icon');
+            icon.setAttribute('name', 'logo-linkedin');
+            icon.style.color = '#fff';
+            icon.style.fontSize = '20px';
+
+            a.appendChild(icon);
+            li.appendChild(a);
+            ul.appendChild(li);
+
+            // Add the LinkedIn button right of the title inside the flex container
+            titleLinkedinContainer.appendChild(ul);
         }
     }
 });
